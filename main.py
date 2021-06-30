@@ -1,2 +1,1 @@
-welcome = input("------<@ Welcome to Lucky Unicorns @>------ ")
-
+input("------<@ Welcome to Lucky Unicorns @>------ ")
