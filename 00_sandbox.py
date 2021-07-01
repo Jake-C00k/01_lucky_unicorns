@@ -1,3 +1,6 @@
+#Import random number generator
+from random import randint
+
 #Set up Variables
 get_age = None
 
@@ -12,3 +15,20 @@ while get_age == None:
 
 #Show the user their age
 print("You are {} years old".format(get_age))
+
+print("We will now generate a number, if your age is higher than this number, you will win a prize!")
+
+#Store a minimum and maximum value for the random generator
+min = get_age - 5
+max = get_age + 20
+
+#generate a random number
+for _ in range(1):
+	value = randint(min, max)
+	print("The number is... {}".format(value))
+
+#Check whether the number is greater
+if value < get_age:
+    print("Hooray, you won!")
+else:
+    print("Sorry, today isn't your lucky day.")
