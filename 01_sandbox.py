@@ -5,6 +5,14 @@ from random import randint
 get_age = None
 prize = "🎁"
 no_prize = "😔"
+instructions = "We will ask your age and then generate a number, if your age is higher than this number, you will win a prize!"
+played_before = ("")
+#Checks if user has played before
+while played_before.lower().strip() != "yes":
+    played_before = input("Have you played the age game before?")
+        if played_before.lower().strip() == "no":
+        print(instructions)
+
 #Check to see whether the age is a valid number
 while get_age == None:
     try:
@@ -16,8 +24,6 @@ while get_age == None:
 
 #Show the user their age
 print("You are {} years old".format(get_age))
-
-input("We will now generate a number, if your age is higher than this number, you will win a prize!")
 
 #Store a minimum and maximum value for the random generator
 min = get_age - 5
