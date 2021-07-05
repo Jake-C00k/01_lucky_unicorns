@@ -5,13 +5,26 @@ from random import randint
 get_age = None
 prize = "🎁"
 no_prize = "😔"
-instructions = "We will ask your age and then generate a number, if your age is higher than this number, you will win a prize!"
+streak = None
+high_score = None
+
+def instructions(): 
+    input("We will ask your age and then generate a number, if your age is higher than this number, you will win a prize! ")
+
 played_before = ("")
 #Checks if user has played before
 while played_before.lower().strip() != "yes":
-    played_before = input("Have you played the age game before?")
-        if played_before.lower().strip() == "no":
-        print(instructions)
+    played_before = str(input("Have you played the age game before? ")).lower().strip()
+    if played_before == "no":
+        instructions()
+        break
+    if played_before == "yes":
+     break
+    else:
+        print("Sorry, there was an error, please re-enter and make sure your answer is a yes or no.")
+        played_before = ("")
+    
+input("Lets begin")
 
 #Check to see whether the age is a valid number
 while get_age == None:
@@ -38,6 +51,11 @@ for _ in range(1):
 if value < get_age:
     print("Hooray, you won!")
     print(prize)
+    
 else:
     print("Sorry, today isn't your lucky day.")
     print(no_prize)
+    
+#Asks user if they would like to continue
+
+
