@@ -35,5 +35,3 @@ if value < get_age:
 else:
     print("Sorry, today isn't your lucky day.")
     print(no_prize)
-
-
