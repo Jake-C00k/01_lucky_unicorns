@@ -7,19 +7,17 @@ prize = "🎁"
 no_prize = "😔"
 streak = 0
 high_score = 0
-value =  0
+value =  124
 round =  1
+play_again = None
+
+#defining functions
 
 def gen():
     for _ in range(1):
         value = int(randint(min, max))
         print("The number is... {}".format(value))
         return value
-
-def gensecret():
-       for _ in range(1):
-        value = int(randint(sec_min, sec_max))
-        print("The number is...{}".format(value))
 
 def instructions():
     input("We will ask your age and then generate a number, if your age is higher than this number, you will win a prize! ")
@@ -42,7 +40,7 @@ secret = input("Lets begin. ").lower().strip()
 #Check to see whether the age is a valid number
 while get_age == 0:
     try:
-        get_age = int(input("Please enter your age as an integer."))
+        get_age = int(input("Please enter your age as an integer: "))
         while get_age <= 0 or get_age >= 123:
             get_age = int(input("Sorry, {} isn't currently a possible age, please enter a number.".format(get_age)))
     except ValueError:
@@ -61,16 +59,20 @@ sec_max = get_age + 5
 #generate a random number
 if secret == "u u d d l r l r b a s":
     print("Cheat code activated: Konami code ")
-    gensecret()
+    def gen():
+        for _ in range(1):
+            value = int(randint(sec_min, sec_max))
+            print("The number is...{}".format(value))
+    gen()
 else:
     gen()
 #Check whether the number is greater
-if value < get_age:
+if value <= get_age:
     print("Hooray, you won! ")
     input(prize)
     win = "yes"
     streak += 1
-else:
+elif value > get_age:
     print("Sorry, today isn't your lucky day. ")
     input(no_prize)
     win = "no"
@@ -80,7 +82,19 @@ if win == "yes":
     round += 1
 else:
     print("Thanks for playing the game, try again soon. ")
+    exit()
 
-if play_again == "yes" or play_again == "sure":
+#Begin round 2
+if play_again == "yes" or play_again == "y":
     print("Round {}: ".format(round))
-    round = 1
+    round += 1
+    play_again = None
+else:
+    exit()
+
+gen()
+
+print("Your current streak is {}".format(streak))
+
+
+
