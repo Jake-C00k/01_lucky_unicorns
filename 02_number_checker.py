@@ -21,6 +21,5 @@ def num_check(question, low, high):
         except ValueError:
             print(error)
 
-while "a" != "b":
-    num_check("Please enter a number between {} and {} ".format(low, high), low, high)
+
 
