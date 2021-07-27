@@ -2,7 +2,7 @@
 low = 1
 high = 10
 def num_check(question, low, high):
-    error = "Please enter a whole number between {} and {}\n".format(low, high)
+    error = "Please give a whole number between {} and {} as your response\n".format(low, high)
 
     valid = False
     while not valid:
@@ -12,6 +12,7 @@ def num_check(question, low, high):
 
             #Check to see whether the response is expected
             if low <= response <= high:
+                print("Game Continues")
                 return response
 
             else:
@@ -20,6 +21,6 @@ def num_check(question, low, high):
         except ValueError:
             print(error)
 
-#while "a" != "b":
-    #num_check("Please enter a number between {} and {} ".format(low, high), low, high)
-#num
+while "a" != "b":
+    num_check("Please enter a number between {} and {} ".format(low, high), low, high)
+
