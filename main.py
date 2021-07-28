@@ -27,7 +27,7 @@ def yes_no(question):
             return answer
             return response
         elif answer in list(no) and instruction == True:
-            num_check("How many rounds do you want to play? ", low, high)
+            num_check("How many rounds do you want to play?\n ", low, high)
 
         elif answer in list(no):
             instructions()
