@@ -1,4 +1,4 @@
-import random
+from random import randint
 min = 1
 max = 100
 def num_gen():
