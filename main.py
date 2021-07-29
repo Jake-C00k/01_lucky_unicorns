@@ -1,5 +1,6 @@
 #Import all necessary
-import random
+from random import randint
+
 
 #Create Variables
 yes = ["yes", "y", "yep", "affirmative"]
@@ -7,6 +8,9 @@ no = ["no", "n", "nope", "negative"]
 low = 1
 high = 10
 instruction = False
+min = 1
+max = 100
+
 
 #Define functions
 def instructions():
@@ -25,7 +29,7 @@ def yes_no(question):
         if answer in list(yes):
             valid = True
             return answer
-            return response
+            return num_check.response
         elif answer in list(no) and instruction == True:
             num_check("How many rounds do you want to play?\n ", low, high)
 
@@ -43,18 +47,46 @@ def num_check(question, low, high):
     while not valid:
         try:
             #Ask question and get response
-            response = int(input(question))
+            num_check.response = int(input(question))
 
             #Check to see whether the response is expected
-            if low <= response <= high:
-                yes_no("Ok, so you want {} round/s?\n".format(response))
-                return response
+            if low <= num_check.response <= high:
+                yes_no("Ok, so you want {} round/s?\n".format(num_check.response))
+                return num_check.response
 
             else:
                 print(error)
         #If unexpected value, re-run question
         except ValueError:
             print(error)
+
+def num_gen():
+    for _ in range(1):
+        value = int(randint(min, max))
+        if 0 < value <= 25:
+            num_gen.token = "Zebra"
+            statement = "Not bad, could be worse"
+            num_gen.value = 0.5
+        elif 25 < value <= 50:
+            num_gen.token = "Horse"
+            statement = "Not bad, could be worse"
+            num_gen.value = 0.5
+        elif 50 < value <= 90:
+            num_gen.token = "😢😢 Donkey 😢😢"
+            statement = "Unlucky, hopefully you do better next time"
+            num_gen.value = 0
+        elif 90 < value <= 100:
+            num_gen.token = "🦄🦄 Unicorn 🦄🦄"
+            statement = "Wow, that's fantastic, you really won big!"
+            num_gen.value = 5
+    print("Generating token...")
+    print("You got a {}".format(num_gen.token))
+    print(statement)
+
+def balance_calc(balance, value):
+    balance_calc.bal = balance + value - 1
+    print("Your current balance is")
+
 
 #Main body
 print("""
@@ -64,5 +96,8 @@ print("""
 yes_no("Have you played the lucky unicorn game before?\n ")
 input("Okay then, we're ready to start!\n")
 instruction = True
-num_check("How many rounds do you want to play?\n ", low, high)
+num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
+num_gen()
+balance_calc(num_check.response, num_gen.value)
+
 
