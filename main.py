@@ -96,12 +96,11 @@ print("""
 yes_no("Have you played the lucky unicorn game before?\n ")
 input("Okay then, we're ready to start!\n")
 instruction = True
-balance = num_check.response
 round_start = True
-while yes_no.play_again == True and 0.5 < balance:
+while yes_no.play_again == True and 0.5 < num_check.response:
     num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
     num_gen()
-    balance -= 1
-    balance += value
+    num_check.response -= 1
+    num_check.response += value
     print("Your current balance is: {}".format(balance))
     yes_no("Continue playing?")
