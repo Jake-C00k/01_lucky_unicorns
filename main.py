@@ -10,7 +10,7 @@ high = 10
 instruction = False
 min = 1
 max = 100
-
+round_start = False
 
 #Define functions
 def instructions():
@@ -22,6 +22,7 @@ def instructions():
 
 def yes_no(question):
     valid = False
+    yes_no.play_again = True
     while not valid:
     # Ask question
         answer = input(question).lower().strip()
@@ -33,6 +34,8 @@ def yes_no(question):
         elif answer in list(no) and instruction == True:
             num_check("How many rounds do you want to play?\n ", low, high)
 
+        elif answer in list(no) and round_start == True:
+            yes_no.play_again == False
         elif answer in list(no):
             instructions()
             valid = True
@@ -83,9 +86,6 @@ def num_gen():
     print("You got a {}".format(num_gen.token))
     print(statement)
 
-def balance_calc(balance, value):
-    balance_calc.bal = balance + value - 1
-    print("Your current balance is")
 
 
 #Main body
@@ -96,8 +96,12 @@ print("""
 yes_no("Have you played the lucky unicorn game before?\n ")
 input("Okay then, we're ready to start!\n")
 instruction = True
-num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
-num_gen()
-balance_calc(num_check.response, num_gen.value)
-
-
+balance = num_check.response
+round_start = True
+while yes_no.play_again == True and 0.5 < balance:
+    num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
+    num_gen()
+    balance -= 1
+    balance += value
+    print("Your current balance is: {}".format(balance))
+    yes_no("Continue playing?")
