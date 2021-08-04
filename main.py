@@ -12,6 +12,9 @@ min = 1
 max = 100
 round_start = False
 start = True
+first = True
+fin = False
+
 #Define functions
 def instructions():
     input("Okay, Here are the instructions:")
@@ -31,6 +34,10 @@ def yes_no(question):
             valid = True
             return answer
             return num_check.response
+
+        elif answer in list(no) and fin == True:
+            yes_no.play_again == False
+
         elif answer in list(no) and instruction == True:
             num_check("How many rounds do you want to play?\n ", low, high)
 
@@ -50,12 +57,16 @@ def num_check(question, low, high):
     while not valid:
         try:
             #Ask question and get response
-            num_check.response = int(input(question))
+            if first == True:
+                num_check.response = None
+                num_check.response = int(input(question))
 
+            else:
+                num_check.response = int(input(question))
             #Check to see whether the response is expected
             if low <= num_check.response <= high:
                 yes_no("Ok, so you want {} round/s?\n".format(num_check.response))
-                return num_check.response
+                return
 
             else:
                 print(error)
@@ -98,9 +109,14 @@ input("Okay then, we're ready to start!\n")
 instruction = True
 round_start = True
 num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
+first = False
+fin = True
 while 0.5 < num_check.response and yes_no.play_again == True:
     num_gen()
     num_check.response -= 1
     num_check.response += num_gen.value
     print("Your current balance is: {}".format(num_check.response))
     yes_no("Continue playing?")
+
+input("Thank you for playing the Lucky Unicorn game")
+input("We hope you play again soon")
