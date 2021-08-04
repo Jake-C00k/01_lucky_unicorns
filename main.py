@@ -11,7 +11,7 @@ instruction = False
 min = 1
 max = 100
 round_start = False
-
+start = True
 #Define functions
 def instructions():
     input("Okay, Here are the instructions:")
@@ -68,19 +68,19 @@ def num_gen():
         value = int(randint(min, max))
         if 0 < value <= 25:
             num_gen.token = "Zebra"
-            statement = "Not bad, could be worse"
+            statement = "Not bad, could be worse\n"
             num_gen.value = 0.5
         elif 25 < value <= 50:
             num_gen.token = "Horse"
-            statement = "Not bad, could be worse"
+            statement = "Not bad, could be worse\n"
             num_gen.value = 0.5
         elif 50 < value <= 90:
             num_gen.token = "😢😢 Donkey 😢😢"
-            statement = "Unlucky, hopefully you do better next time"
+            statement = "Unlucky, hopefully you do better next time\n"
             num_gen.value = 0
         elif 90 < value <= 100:
             num_gen.token = "🦄🦄 Unicorn 🦄🦄"
-            statement = "Wow, that's fantastic, you really won big!"
+            statement = "Wow, that's fantastic, you really won big!\n"
             num_gen.value = 5
     print("Generating token...")
     print("You got a {}".format(num_gen.token))
@@ -97,10 +97,10 @@ yes_no("Have you played the lucky unicorn game before?\n ")
 input("Okay then, we're ready to start!\n")
 instruction = True
 round_start = True
-while yes_no.play_again == True and 0.5 < num_check.response:
-    num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
+num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
+while 0.5 < num_check.response and yes_no.play_again == True:
     num_gen()
     num_check.response -= 1
-    num_check.response += value
-    print("Your current balance is: {}".format(balance))
+    num_check.response += num_gen.value
+    print("Your current balance is: {}".format(num_check.response))
     yes_no("Continue playing?")
