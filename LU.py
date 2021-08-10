@@ -2,10 +2,7 @@
 from random import randint
 
 # Variable Creation
-min = 1
-max = 10
-low = 1
-high = 10
+
 yes = ["yes", "y", "yep", "affirmative"]
 no = ["no", "n", "nope", "negative"]
 
@@ -22,8 +19,6 @@ def instructions():
     input(" -Unfortunately, if it is a donkey, you will go home empty handed- ")
 
 def yes_no(question):
-    yes_no.answer = None
-    clear(yes_no.answer)
     while True:
         yes_no.answer = input(question).lower().strip()
         if yes_no.answer in yes:
@@ -35,7 +30,7 @@ def yes_no(question):
             break
 
         else:
-            print("Please answer with a yes or no")
+            print("Please answer with a yes or no\n")
 
 def num_check(question, low, high):
     error = "Please give a whole number between {} and {} as your response\n".format(low, high)
@@ -44,12 +39,12 @@ def num_check(question, low, high):
     while not valid:
         try:
             # Ask question and get response
-            response = int(input(question))
+            num_check.response = int(input(question))
 
             # Check to see whether the response is expected
-            if low <= response <= high:
-                print("Game Continues")
-                return response
+            if low <= num_check.response <= high:
+                yes_no("So you want {} rounds?".format(num_check.response))
+                return num_check.response
 
             else:
                 print(error)
@@ -57,7 +52,7 @@ def num_check(question, low, high):
         except ValueError:
             print(error)
 
-def num_gen():
+def num_gen(min, max):
     for _ in range(1):
         value = int(randint(min, max))
         if 0 < value <= 25:
@@ -96,4 +91,20 @@ if yes_no.answer is True:
 elif yes_no.answer is False:
     instructions()
     print("Ok then, let's go!")
-num_check("How much do you want to add to your balance ($1 = 1 round)\n ", low, high)
+yes_no.answer = False
+while yes_no.answer == False:
+    clear(yes_no.answer)
+    num_check("How much do you want to add to your balance ($1 = 1 round)\n ", 1, 10)
+print("{} round/s it is!".format(num_check.response))
+clear(yes_no.answer)
+while num_check.response > 0.5 and yes_no.answer != False:
+    num_gen(1, 100)
+    num_check.response -= 1
+    num_check.response += num_gen.value
+    print("Your current balance is: {}".format(num_check.response))
+    yes_no("Continue playing?")
+if num_check.response <= 0.5:
+    input("You can't play with ${}!".format(num_check.response))
+    input("Get Out!")
+else:
+    print("Thank you for playing, enjoy your day!")
