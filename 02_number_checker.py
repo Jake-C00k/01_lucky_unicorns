@@ -4,8 +4,7 @@ high = 10
 def num_check(question, low, high):
     error = "Please give a whole number between {} and {} as your response\n".format(low, high)
 
-    valid = False
-    while not valid:
+    while True:
         try:
             #Ask question and get response
             response = int(input(question))
@@ -20,6 +19,3 @@ def num_check(question, low, high):
         #If unexpected value, re-run question
         except ValueError:
             print(error)
-
-
-
