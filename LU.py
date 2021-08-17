@@ -34,16 +34,14 @@ def yes_no(question):
 
 def num_check(question, low, high):
     error = "Please give a whole number between {} and {} as your response\n".format(low, high)
-
-    valid = False
-    while not valid:
+    while True:
         try:
             # Ask question and get response
             num_check.response = int(input(question))
 
             # Check to see whether the response is expected
             if low <= num_check.response <= high:
-                yes_no("So you want {} rounds?".format(num_check.response))
+                yes_no("So you want {} round/s?".format(num_check.response))
                 return num_check.response
 
             else:
@@ -79,7 +77,18 @@ def num_gen(min, max):
     print("You got a {}".format(num_gen.token))
     print(statement)
 
-
+def balance():
+    while num_check.response > 0.5 and yes_no.answer != False:
+        num_gen(1, 100)
+        num_check.response -= 1
+        num_check.response += num_gen.value
+        print("Your current balance is: {}".format(num_check.response))
+        yes_no("Continue playing?")
+    if num_check.response <= 0.5:
+        input("You can't play with ${}!".format(num_check.response))
+        input("Get Out!")
+    else:
+        print("Thank you for playing, enjoy your day!")
 # Main Routine
 print("""
 -----------------------------------
@@ -95,16 +104,6 @@ yes_no.answer = False
 while yes_no.answer == False:
     clear(yes_no.answer)
     num_check("How much do you want to add to your balance ($1 = 1 round)\n ", 1, 10)
-print("{} round/s it is!".format(num_check.response))
+print("{} round/s it is!\n".format(num_check.response))
 clear(yes_no.answer)
-while num_check.response > 0.5 and yes_no.answer != False:
-    num_gen(1, 100)
-    num_check.response -= 1
-    num_check.response += num_gen.value
-    print("Your current balance is: {}".format(num_check.response))
-    yes_no("Continue playing?")
-if num_check.response <= 0.5:
-    input("You can't play with ${}!".format(num_check.response))
-    input("Get Out!")
-else:
-    print("Thank you for playing, enjoy your day!")
+balance()
